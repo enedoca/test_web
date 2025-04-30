@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>3분할 다크 테마</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #2e2e2e;
+      color: white;
+      font-family: sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .column {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #stageImage, #originalImage {
+      width: 300px;
+      height: 300px;
+      cursor: pointer;
+    }
+
+    .content p {
+      margin: 10px 0;
+    }
+
+    .content span {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 왼쪽: 단계 이미지 -->
+    <div class="column">
+      <img id="stageImage" src="images/stage1.png" alt="단계 이미지">
+    </div>
+
+    <!-- 가운데: 본문 텍스트 -->
+    <div class="column content">
+      <h1>안녕하세요!</h1>
+      <p>이것은 다크 테마 페이지입니다.</p>
+      <span>block으로 단락으로 span으로</span>
+      <p style="margin-top:40px;">마진탑40px</p>
+      <time datetime=""></time>
+    </div>
+
+    <!-- 오른쪽: 원본 이미지 -->
+    <div class="column">
+      <img id="originalImage" src="images/트랄랄레로 트랄랄라.webp" alt="트랄랄레로 트랄랄라 이미지">
+    </div>
+  </div>
+
+  <script>
+    // 왼쪽 이미지: stage1~stage6.png
+    const stageImage = document.getElementById('stageImage');
+    let stage = 1;
+
+    stageImage.addEventListener('click', () => {
+      stage = 1;
+      stageImage.src = `images/stage${stage}.png`;
+    });
+
+    setInterval(() => {
+      if (stage < 6 && Math.random() < 0.05) {
+        stage++;
+        stageImage.src = `images/stage${stage}.png`;
+      }
+    }, 5000);
+
+    // 오른쪽 이미지: 트랄랄레로 ↔ 봄바르딜로
+    const originalImage = document.getElementById('originalImage');
+    const imageSources = [
+      "images/트랄랄레로 트랄랄라.webp",
+      "images/봄바르딜로 크로코딜로.webp"
+    ];
+    let currentImageIndex = 0;
+
+    function toggleImage() {
+      currentImageIndex = 1 - currentImageIndex;
+      originalImage.src = imageSources[currentImageIndex];
+    }
+
+    originalImage.addEventListener('click', toggleImage);
+    setInterval(toggleImage, 10000);
+  </script>
+
+</body>
+</html>
